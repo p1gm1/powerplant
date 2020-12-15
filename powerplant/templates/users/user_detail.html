@@ -7,12 +7,12 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-sm-12">
-
-      <h2>{{ object.username }}</h2>
-      {% if object.name %}
-        <p>{{ object.name }}</p>
-      {% endif %}
+    <div class="col-sm-12 pb-3 pt-3" style="border-bottom: 1px solid #dee2e6">
+    {% if object.name %}
+      <h3>Hi {{ object.name }}, please choose if you wish to consult or update your info or your mail.</h3>
+    {% else %}
+      <h3>Hi {{ object.username }}, please choose if you wish to consult or update your info or your mail.</h3>
+    {% endif %} 
     </div>
   </div>
 
@@ -20,10 +20,9 @@
 <!-- Action buttons -->
 <div class="row">
 
-  <div class="col-sm-12">
-    <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
-    <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
-    <!-- Your Stuff: Custom user template urls -->
+  <div class="col-sm-12 pt-3">
+    <a class="btn btn-danger" href="{% url 'users:update' %}" role="button">My Info</a>
+    <a class="btn btn-danger" href="{% url 'account_email' %}" role="button">E-Mail</a>
   </div>
 
 </div>
