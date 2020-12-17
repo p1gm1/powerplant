@@ -1,1 +1,30 @@
 {% extends "base.html" %}
+
+{% block content %}
+<div class="row mt-5 justify-content-md-center">
+    <div class="col offset-4 mt-2 mb-2">
+        <h1>Welcome to powerplant!!!</h1>
+        <br>
+    </div>
+</div>
+<div class="row justify-content-md-center">
+    <div class="col-6 offset-1 mt-2">
+        <p>In here you can use our trained machine learning model to help you control
+         the energy output of your powerplant, this value is only intented as an aid
+         for making decisions and it should only be used as a guide.</p>
+    </div>
+</div>
+<div class="row justify-content-md-center">
+    <div class="col-6 offset-1 mt-2">
+    {% if request.user.username %}
+        <p>Please enter in your <a href="{% url 'users:powerplant' request.user.username %}">powerplant</a> to start</p>
+    {% else %}
+        <p>Please <a href="{% url 'account_login' %}">sign in</a> to start</p>
+    {% endif %}
+</div>
+<div class="row justify-content-md-center">
+    <div class="col-11 offset-1 mt-2">
+        <p>If you wish to learn more about powerplant please check the <a href="{% url 'about' %}">about</a> section.</p>
+    </div>
+</div>
+{% endblock  %}

@@ -10,8 +10,10 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 
+# Utils
 import os
 import sys
+# Django
 import django
 
 if os.getenv("READTHEDOCS", default=False) == "True":

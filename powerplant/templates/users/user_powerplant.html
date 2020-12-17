@@ -12,8 +12,9 @@
                 {% csrf_token %}
                     
                 {{ form.as_p }}
-
-                <button class="btn btn-danger mt-3" type="submit">Update</button>
+                <label for="inputEnergy">Energy Output MW</label>
+                <input class="form-control" placeholder="{{ request.user.ep }}" id="inputEnergy" readonly>
+                <button class="btn btn-danger mt-3" type="submit">Calculate output</button>
         </form>
     </div>
  </div>
