@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, RedirectView, UpdateView
-from django.views.generic.edit import FormMixin, ProcessFormView
+from django.views.generic.edit import FormView
 
 from powerplant.users.forms import UserPowerplantForm
 
@@ -52,23 +52,27 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
 user_redirect_view = UserRedirectView.as_view()
 
-class UserPowerplantView(LoginRequiredMixin, UpdateView):
+class UserPowerplantView(LoginRequiredMixin, FormView):
 
     model = User
-    fields = ["at", 
-              "v",
-              "ap",
-              "rh",
-              "ep"]
               
-    form = UserPowerplantForm()
+    form_class = UserPowerplantForm
+    
     template_name="users/user_powerplant.html"
 
-    def get_object(self):
-        return User.objects.get(username=self.request.user.username)
+    def get_initial(self):
+        initial={'temperature': User.objects.get(username=self.request.user.username).at,
+                 'pressure': User.objects.get(username=self.request.user.username).ap,
+                 'humidity': User.objects.get(username=self.request.user.username).rh,
+                 'vacuum': User.objects.get(username=self.request.user.username).v,
+                 'output': User.objects.get(username=self.request.user.username).ep}
+        return initial
 
     def form_valid(self, form):
-        form.save()
+        form.save(self.request)
         return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse("users:powerplant", kwargs={"username": self.request.user.username})
 
 user_powerplant_view = UserPowerplantView.as_view()

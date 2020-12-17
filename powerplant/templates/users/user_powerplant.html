@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
- <div class="row">
-    <div class="col mt-2 mb-2">
+ <div class="row justify-content-md-center">
+    <div class="col offset-4 mt-2 mb-2">
         <h3>Your powerplant</h3>
     </div>
  </div>
  <div class="row">
-    <div class="col mt-2">
-        <form method="POST" action="{%url 'users:powerplant' request.user.username%}">
+    <div class="col-3 offset-4 mt-2">
+        <form method="POST" action="{%url 'users:powerplant' request.user.username%}" enctype="multipart/form-data">
                 {% csrf_token %}
-                
+                    
                 {{ form.as_p }}
 
                 <button class="btn btn-danger mt-3" type="submit">Update</button>
